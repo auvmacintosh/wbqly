@@ -37,6 +37,7 @@ public class Qlyuser {
     private LocalDateTime lmt;
 
     @PrePersist
+    @PreUpdate
     protected void onCreate() {
         if (authority == null) { authority = "USER"; }
         if (enabled == null) { enabled = true; }

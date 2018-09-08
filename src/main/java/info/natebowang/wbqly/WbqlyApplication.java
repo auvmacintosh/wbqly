@@ -16,12 +16,21 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class WbqlyApplication {
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+public class WbqlyApplication extends GlobalMethodSecurityConfiguration {
 
-    @Configuration
-    @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-    public static class MethodSecurityConf extends GlobalMethodSecurityConfiguration {
-    }
+//    @Configuration
+//    @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//    public static class MethodSecurityConf extends GlobalMethodSecurityConfiguration {
+//        @Autowired
+//        QlyuserRepository qlyuserRepository;
+//
+//        @Override
+//        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//            auth.userDetailsService(new QlyuserDetailsService(qlyuserRepository)).
+//                    passwordEncoder(new BCryptPasswordEncoder());
+//        }
+//    }
 
     @Configuration
     @EnableWebSecurity
@@ -37,13 +46,19 @@ public class WbqlyApplication {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .httpBasic().and()
+//            http
+//                    .httpBasic().and()
+//                    .authorizeRequests()
+//                    .antMatchers(HttpMethod.GET, "/qlyusers").permitAll()
+//                    .antMatchers(HttpMethod.POST, "/qlyusers").permitAll().and()
+//                    .csrf().disable()
+//                    .rememberMe();
+
+            http.httpBasic().and()
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/qlyusers").permitAll()
-                    .antMatchers(HttpMethod.POST, "/qlyusers").permitAll().and()
-                    .csrf().disable()
-                    .rememberMe();
+                    .antMatchers(HttpMethod.GET, "qlyusers").permitAll()
+                    .antMatchers(HttpMethod.POST, "/qlyusers").permitAll()
+                    .and().csrf().disable();
         }
     }
 
