@@ -20,8 +20,8 @@ public class Category {
     @NotNull
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(insertable=false)
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    @Column(insertable=false)
     private LocalDateTime lmt;
 
 }

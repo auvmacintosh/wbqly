@@ -32,8 +32,8 @@ public class Qlyuser {
 
     private Boolean enabled;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(insertable=false)
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    @Column(insertable=false)
     private LocalDateTime lmt;
 
     @PrePersist

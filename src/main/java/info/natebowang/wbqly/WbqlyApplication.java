@@ -39,10 +39,14 @@ public class WbqlyApplication {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.cors()
-                    .and().httpBasic()
+//                    .and().httpBasic() // 可以直接运行，走HTTP协议
+                    .and().formLogin().defaultSuccessUrl("http://localhost:3000", true) //
+                    // 可以直接运行，这个不满足任何协议，只由程序控制，有logout机制
+//                    .and().oauth2Login() // 还得配置bean才能运行
                     .and().authorizeRequests()
                     .antMatchers(HttpMethod.GET, "qlyusers").permitAll()
                     .antMatchers(HttpMethod.POST, "/qlyusers").permitAll()
+                    .and().csrf().disable()
             ;
         }
     }
@@ -51,7 +55,7 @@ public class WbqlyApplication {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

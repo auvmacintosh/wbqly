@@ -26,8 +26,8 @@ public class Article {
     @NotNull
     private LocalDateTime publishTime;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(insertable=false)
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY) // 加了这个lmt在PUT的时候不改变
+//    @Column(insertable=false)
     private LocalDateTime lmt;
 
     @ManyToMany(fetch = FetchType.LAZY)
